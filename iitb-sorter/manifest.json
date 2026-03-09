@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "IITB Mail Sorter",
+  "version": "2.0",
+  "description": "Automatically sorts your IITB Roundcube inbox by academic priority using AI",
+  "permissions": ["activeTab", "storage", "scripting", "tabs"],
+  "host_permissions": [
+    "https://webmail.iitb.ac.in/*",
+    "https://api.groq.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://webmail.iitb.ac.in/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

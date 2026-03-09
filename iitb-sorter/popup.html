@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>IITB Mail Sorter</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Syne:wght@700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 340px;
+    background: #080810;
+    color: #e2e2f0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+  }
+
+  .header {
+    background: linear-gradient(135deg, #0f0f1e, #151528);
+    padding: 18px 20px 14px;
+    border-bottom: 1px solid #1e1e30;
+  }
+
+  .title {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: linear-gradient(90deg, #818cf8, #c084fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 2px;
+  }
+
+  .sub {
+    color: #4b5563;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+  }
+
+  .body { padding: 18px 20px; }
+
+  .label {
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 10px;
+    margin-bottom: 8px;
+  }
+
+  input {
+    width: 100%;
+    background: #0f0f1a;
+    border: 1px solid #2d2d4a;
+    border-radius: 8px;
+    color: #e2e2f0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    padding: 10px 12px;
+    outline: none;
+    margin-bottom: 10px;
+    transition: border-color 0.2s;
+  }
+
+  input:focus { border-color: #4f46e5; }
+
+  .btn {
+    width: 100%;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 11px;
+    transition: opacity 0.2s;
+  }
+
+  .btn:hover { opacity: 0.88; }
+
+  .status {
+    margin-top: 10px;
+    font-size: 11px;
+    color: #6b7280;
+    text-align: center;
+    min-height: 16px;
+  }
+
+  .status.ok { color: #34d399; }
+  .status.err { color: #f87171; }
+
+  .divider {
+    border: none;
+    border-top: 1px solid #1e1e30;
+    margin: 16px 0;
+  }
+
+  .how {
+    color: #4b5563;
+    font-size: 10px;
+    line-height: 1.7;
+  }
+
+  .how a {
+    color: #818cf8;
+    text-decoration: none;
+  }
+
+  .how strong { color: #6b7280; }
+
+  .interval-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .interval-row label { color: #6b7280; font-size: 10px; white-space: nowrap; }
+
+  select {
+    flex: 1;
+    background: #0f0f1a;
+    border: 1px solid #2d2d4a;
+    border-radius: 8px;
+    color: #e2e2f0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    padding: 8px 10px;
+    outline: none;
+  }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="title">IITB Mail Sorter</div>
+  <div class="sub">// auto-priority on webmail.iitb.ac.in</div>
+</div>
+
+<div class="body">
+  <div class="label">Groq API Key</div>
+  <input type="password" id="apiKey" placeholder="gsk_..." />
+
+  <div class="label" style="margin-top:4px">Re-sort interval</div>
+  <div class="interval-row">
+    <select id="interval">
+      <option value="1">Every 1 min</option>
+      <option value="3" selected>Every 3 min</option>
+      <option value="5">Every 5 min</option>
+      <option value="10">Every 10 min</option>
+    </select>
+  </div>
+
+  <button class="btn" id="saveBtn">Save & Activate</button>
+  <div class="status" id="status"></div>
+
+  <hr class="divider">
+
+  <div class="how">
+    <strong>SETUP:</strong><br>
+    1. Get a free key at <a href="https://console.groq.com/keys" target="_blank">console.groq.com/keys</a><br>
+    2. Paste it above → Save<br>
+    3. Open <a href="https://webmail.iitb.ac.in/?_task=mail&_mbox=INBOX" target="_blank">webmail.iitb.ac.in</a><br>
+    4. Emails auto-sort. 🔴 critical first, 🟡 high, ⚫ medium, · low dimmed<br><br>
+    <strong>COST:</strong> 100% free. Groq has a generous free tier.
+  </div>
+</div>
+
+<script src="popup.js"></script>
+</body>
+</html>
